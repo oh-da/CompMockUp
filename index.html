@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מערכת הקומפילציה: מבט תחבורה ציבורית</title>
+<meta name="description" content="מוקאפ: שליטה ובקרה על השפעת הסדרי תנועה זמניים על התחבורה הציבורית">
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body data-view="night" data-layout="map">
+
+<header class="top">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V10a4 4 0 0 1 4-4h7"/><path d="m14 3 3 3-3 3"/><path d="M18 12v8"/></svg>
+    </span>
+    <span class="brand-text"><strong>מערכת הקומפילציה</strong><span>מבט תחבורה ציבורית</span></span>
+  </div>
+  <div class="top-mid">
+    <span class="demo" tabindex="0" data-tip="הרחובות, התחנות, הקווים ולוחות הזמנים אמיתיים, מתוך ה-GTFS של משרד התחבורה מיום 21.11.2026.&lt;br&gt;החסימות, בקשות ההסטה, האישורים ושינויי ה-GTFS נכתבו לצורך ההדגמה.">מוקאפ להדגמה</span>
+    <span class="now" id="now"></span>
+  </div>
+  <div class="rolebox" id="rolebox"></div>
+</header>
+
+<nav class="rail" id="rail" aria-label="מסכי המערכת"></nav>
+
+<main class="panel" id="panel" aria-live="polite"></main>
+
+<section class="mapwrap" aria-label="מפה">
+  <div id="map"></div>
+  <div class="legend" id="legend"></div>
+  <div class="scrub" id="scrub" role="group" aria-label="ציר הזמן של הלילה"></div>
+  <p class="credit">רחובות, תחנות וקווים: GTFS, משרד התחבורה</p>
+</section>
+
+<main class="page" id="page"></main>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script src="data/corridor.js"></script>
+<script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="assets/js/engine.js"></script>
+<script src="assets/js/scenario.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/xlsx.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/views.js"></script>
+<script>App.start();</script>
+</body>
+</html>
