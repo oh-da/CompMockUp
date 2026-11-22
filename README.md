@@ -21,6 +21,22 @@ It covers the five modules of the functional spec:
 Open `index.html` in a browser. Nothing to install or build, and it works
 offline: the map, fonts and data are all in the repository.
 
+## Publishing on GitHub Pages
+
+The site is static and uses only relative paths, so it runs from the
+repository root with no build step.
+
+1. On GitHub open Settings, then Pages.
+2. Under "Build and deployment" set Source to "Deploy from a branch".
+3. Choose branch `main` and folder `/ (root)`, then Save.
+
+After a minute or two the mockup is at `https://oh-da.github.io/CompMockUp/`,
+and every push to `main` republishes it. The address is public to anyone who
+has it. The page asks search engines not to index it (`robots` meta tag in
+`index.html`); remove that line if you want it to be findable.
+
+`.nojekyll` tells Pages to serve the files as they are.
+
 ## What is real and what is invented
 
 Real, taken from the Ministry of Transport GTFS feed dated 21.11.2026 for the
