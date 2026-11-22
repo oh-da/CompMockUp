@@ -84,11 +84,23 @@
     return zip(files);
   }
 
-  function download(blob, filename) {
+  function viaLink(blob, filename) {
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob); a.download = filename;
     document.body.appendChild(a); a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+
+  /* Saves the file. Resolves when it was handed over, rejects when the
+     viewer declined. Inside a hosted Claude artifact a page may not start a
+     download itself, so the host's save dialog is used when there is one. */
+  function download(blob, filename) {
+    var host = root.claude;
+    if (!host || typeof host.use !== 'function') { viaLink(blob, filename); return Promise.resolve(); }
+    return host.use('downloads').then(function (saver) {
+      if (!saver) { viaLink(blob, filename); return; }
+      return saver.save({ filename: filename, data: blob });
+    });
   }
 
   root.Xlsx = { workbook: workbook, download: download };

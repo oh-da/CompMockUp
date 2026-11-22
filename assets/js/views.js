@@ -624,8 +624,11 @@
         return [k, uniq(groups[k].map(function (r) { return r[0]; })).length, uniq(groups[k].map(function (r) { return r[8] + r[9]; })).length, groups[k].reduce(function (n, r) { return n + r[12]; }, 0)];
       })
     }].concat(names.map(function (k) { return { name: k, header: header, rows: groups[k] }; }));
-    root.Xlsx.download(root.Xlsx.workbook(sheets), 'compilation-transit-' + Sc.NOW.date.replace(/\./g, '-') + '.xlsx');
-    A.toast('הקובץ ירד: ' + all.length + ' שורות ב-' + names.length + ' גיליונות, ' + (by === 'op' ? 'לפי מפעיל' : by === 'city' ? 'לפי רשות מקומית' : 'לפי מחוז'));
+    root.Xlsx.download(root.Xlsx.workbook(sheets), 'compilation-transit-' + Sc.NOW.date.replace(/\./g, '-') + '.xlsx').then(function () {
+      A.toast('קובץ האקסל מוכן: ' + all.length + ' שורות ב-' + names.length + ' גיליונות, ' + (by === 'op' ? 'לפי מפעיל' : by === 'city' ? 'לפי רשות מקומית' : 'לפי מחוז'));
+    }, function (err) {
+      A.toast(err && err.code === 'declined' ? 'ההורדה בוטלה' : 'אי אפשר להוריד קובץ בתצוגה הזו. פתחו את index.html מהמאגר', 'warn');
+    });
     return sheets;
   }
 
